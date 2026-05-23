@@ -19,7 +19,7 @@ const Header = () => {
                 </div>
                 <Link href="/cart" className="relative">
                     <ShoppingCart className="h-5 w-5" />
-                    <Badge>5</Badge>
+                    <Badge className="bg-red-500 h-5 w-5 text-white text-center text-xs absolute -top-3.5 -right-4">5</Badge>
                 </Link>
             </div>
         </header>
