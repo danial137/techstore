@@ -1,4 +1,5 @@
 import { PRODUCTS } from "@/utils/product"
+import {ShoppingCart } from "lucide-react"
 import Image from "next/image"
 
 const Product = () => {
@@ -16,7 +17,10 @@ const Product = () => {
                         </div>
                         <div className="flex justify-between items-center mt-4">
                             <p className="mt-2 text-lg font-semibold text-shark">${product.price}</p>
-                            <button className="font-medium text-sm px-3 border border-athens-gray py-2 cursor-pointer rounded-md"></button>
+                            <button className="font-medium text-sm px-3 border border-athens-gray py-2 cursor-pointer rounded-md flex items-center justify-center gap-2 shadow-xs">
+                                <ShoppingCart className="h-4 w-4"/>
+                                Add to Cart
+                            </button>
                         </div>
                     </div>
                 </div>

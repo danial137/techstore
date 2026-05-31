@@ -20,7 +20,7 @@ const Header = () => {
             <div className="flex gap-4 items-center">
                 {showSearchBar ? (<div className="relative">
                     <Search className="absolute left-3 top-1/2 -translate-y-1/2 h-4 w-4 text-santas-gray  " />
-                    <input className="outline-none w-80 border border-athens-gray py-2 pl-8 rouded-md text-sm" placeholder="search products ... " />
+                    <input className="outline-none w-80 border rounded-2xl border-athens-gray py-2 pl-8 rouded-md text-sm" placeholder="search products ... " />
                 </div>
                 ) : null}
 
