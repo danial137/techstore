@@ -2,6 +2,8 @@ import type { Metadata } from "next";
 import { Poppins } from "next/font/google";
 import "./globals.css";
 import Header from "@/components/Header";
+import { Provider } from "react-redux";
+import store from "@/store/store";
 
 const poppins = Poppins({
   subsets: ["latin"],
@@ -25,8 +27,10 @@ export default function RootLayout({
       className={`${poppins.variable} h-full antialiased`}
     >
       <body className="min-h-full flex flex-col font-sans">
-        <Header />
-        {children}
+        <Provider store={store}> 
+          <Header />
+         {children}
+        </Provider>
       </body>
     </html>
   );
