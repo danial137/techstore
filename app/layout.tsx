@@ -4,6 +4,7 @@ import "./globals.css";
 import Header from "@/components/Header";
 import { Provider } from "react-redux";
 import store from "@/store/store";
+import StoreProvider from "@/store/StoreProvider";
 
 const poppins = Poppins({
   subsets: ["latin"],
@@ -27,10 +28,10 @@ export default function RootLayout({
       className={`${poppins.variable} h-full antialiased`}
     >
       <body className="min-h-full flex flex-col font-sans">
-        <Provider store={store}> 
+        <StoreProvider> 
           <Header />
          {children}
-        </Provider>
+        </StoreProvider>
       </body>
     </html>
   );
