@@ -1,8 +1,16 @@
+"use client"
+import { IProduct } from "@/types/product"
 import { PRODUCTS } from "@/utils/product"
-import {ShoppingCart } from "lucide-react"
+import { ShoppingCart } from "lucide-react"
 import Image from "next/image"
+import { useDispatch } from "react-redux"
 
 const Product = () => {
+    const dispatch = useDispatch();
+
+    const handleAddToCart = (e: React.MouseEvent<HTMLButtonElement>, product: IProduct) => {
+        e.stopPropagation()
+    }
     return (
         <div className="grid grid-cols-4 gap-6 w-full">
             {PRODUCTS.map((product) => (
@@ -17,8 +25,8 @@ const Product = () => {
                         </div>
                         <div className="flex justify-between items-center mt-4">
                             <p className="mt-2 text-lg font-semibold text-shark">${product.price}</p>
-                            <button className="font-medium text-sm px-3 border border-athens-gray py-2 cursor-pointer rounded-md flex items-center justify-center gap-2 shadow-xs">
-                                <ShoppingCart className="h-4 w-4"/>
+                            <button className="font-medium text-sm px-3 border border-athens-gray py-2 cursor-pointer rounded-md flex items-center justify-center gap-2 shadow-xs" onClick={(e) => handleAddToCart(e, product)}>
+                                <ShoppingCart className="h-4 w-4" />
                                 Add to Cart
                             </button>
                         </div>
