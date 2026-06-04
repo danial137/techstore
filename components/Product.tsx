@@ -1,4 +1,5 @@
 "use client"
+import { addToCart } from "@/store/cartSlice"
 import { IProduct } from "@/types/product"
 import { PRODUCTS } from "@/utils/product"
 import { ShoppingCart } from "lucide-react"
@@ -10,6 +11,7 @@ const Product = () => {
 
     const handleAddToCart = (e: React.MouseEvent<HTMLButtonElement>, product: IProduct) => {
         e.stopPropagation()
+        dispatch(addToCart({ product }))
     }
     return (
         <div className="grid grid-cols-4 gap-6 w-full">
