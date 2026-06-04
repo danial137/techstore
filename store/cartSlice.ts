@@ -9,18 +9,40 @@ interface ICartItem {
 
 interface ICartState {
   items: ICartItem[];
-  product: IProduct[];
+  products: IProduct[];
 }
 
-const initialState = {
+const initialState: ICartState = {
   items: [],
   products: PRODUCTS,
 };
 
 const cartSlice = createSlice({
-    initialState,
-    name: "Cart",
-    reducers:{}
+  initialState,
+  name: "Cart",
+  reducers: {
+    addToCart: (state, action) => {
+      const { product, quantity = 1 } = action.payload;
+      const existingItemIndex = state.items.findIndex(
+        (item) => item.product.id === product.id,
+      );
+
+      if (existingItemIndex >= 0) {
+        state.items[existingItemIndex].quantity += quantity;
+      } else {
+        state.items.push({ product, quantity });
+      }
+    },
+
+    removeFromCart: (state, action) => {
+      const { productId, quantity = 1 } = action.payload;
+      const existingItemIndex = state.items.findIndex(
+        (item) => item.product.id === productId,
+      );
+      if (existingItemIndex === -1) return;
+      
+    },
+  },
 });
 
-export default cartSlice.reducer
+export default cartSlice.reducer;
