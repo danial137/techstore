@@ -9,7 +9,7 @@ import { useDispatch } from "react-redux"
 import QuantitySelector from "./QuantitySelector"
 
 const Product = () => {
-    const { items, product } = useAppSelector((state) => state.cart)
+    const { items } = useAppSelector((state) => state.cart)
     const dispatch = useDispatch();
 
     const handleAddToCart = (e: React.MouseEvent<HTMLButtonElement>, product: IProduct) => {
@@ -17,7 +17,7 @@ const Product = () => {
         dispatch(addToCart({ product }))
     }
     return (
-        <div className="grid grid-cols-4 gap-6 w-full">
+        <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-6 w-full">
             {PRODUCTS.map((product) => (
                 <div key={product.id} className="rounded-lg shadow-sm border border-athens-gray overflow-hidden flex flex-col cursor-pointer">
                     <div className="aspect-square">
