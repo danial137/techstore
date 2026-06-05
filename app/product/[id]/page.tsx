@@ -1,11 +1,13 @@
 "use client"
 import QuantitySelector from '@/components/QuantitySelector'
+import { addToCart } from '@/store/cartSlice'
 import { useAppSelector } from '@/store/hooks'
 import { findProductById } from '@/utils/product'
-import { ArrowLeft } from 'lucide-react'
+import { ArrowLeft, ShoppingCart } from 'lucide-react'
 import Image from 'next/image'
 import Link from 'next/link'
-import { useParams } from 'next/navigation'
+import { useParams, useRouter } from 'next/navigation'
+import { useDispatch } from 'react-redux'
 
 
 
@@ -16,12 +18,20 @@ const ProductDetails = () => {
 
     const items = useAppSelector((state) => state.cart.items)
 
+    const router = useRouter()
+
+    const dispatch = useDispatch()
+
     if (!product) {
         return <div className='flex flex-col items-center justify-center gap-2 mt-16'>
             <h1 className='text-2xl font-bold'>Product not found</h1>
             <p className='text-pale-sky'>The product you're looking for doesn't exist.</p>
             <Link href='/' className='text-sm font-medium py-2 px-4 rounded-md bg-red-500 text-white mt-6'>back to home</Link>
         </div>
+    }
+
+    const handleAddToCart = () => {
+        dispatch(addToCart({product}))
     }
 
     return (
@@ -40,7 +50,10 @@ const ProductDetails = () => {
                     <p className='mt-6 leading-relaxed text-pale-sky'>{product.description}</p>
 
                     <div className='flex gap-4 mt-6'>
-                        {items.some((item) => item.product.id === product.id) ? (<QuantitySelector product={product} />) : (<button className='font-medium flex-3 text-sm border border-athens-gray py-2.5 cursor-pointer rounded-md flex items-center justify-center gap-2 shadow-xs bg-red-500 text-white'> Add to Cart </button>)}
+                        {items.some((item) => item.product.id === product.id) ? (<QuantitySelector product={product} />) : (<button className='font-medium flex-3 text-sm border border-athens-gray py-2.5 cursor-pointer rounded-md flex items-center justify-center gap-2 shadow-xs bg-red-500 text-white' onClick={handleAddToCart}>
+                            <ShoppingCart className='h-4 w-4' /> Add to Cart </button>
+                        )}
+                        <button className='font-medium flex-1 text-sm border border-r-athens-gray cursor-pointer rounded-md shadow-xs' onClick={() => router.push('/cart')}>View Cart</button>
                     </div>
                 </div>
             </div>
