@@ -2,15 +2,20 @@
 import { addToCart } from "@/store/cartSlice"
 import { useAppSelector } from "@/store/hooks"
 import { IProduct } from "@/types/product"
-import { PRODUCTS } from "@/utils/product"
 import { ShoppingCart } from "lucide-react"
 import Image from "next/image"
 import { useDispatch } from "react-redux"
 import QuantitySelector from "./QuantitySelector"
+import { useRouter } from "next/navigation"
 
 const Product = () => {
-    const { items } = useAppSelector((state) => state.cart)
+    const { items, products } = useAppSelector((state) => state.cart)
+    const router = useRouter()
     const dispatch = useDispatch();
+
+    const handleProductClick = (id:string) => {
+        router.push(`product/${id}`)
+    }
 
     const handleAddToCart = (e: React.MouseEvent<HTMLButtonElement>, product: IProduct) => {
         e.stopPropagation()
@@ -18,8 +23,8 @@ const Product = () => {
     }
     return (
         <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-6 w-full">
-            {PRODUCTS.map((product) => (
-                <div key={product.id} className="rounded-lg shadow-sm border border-athens-gray overflow-hidden flex flex-col cursor-pointer">
+            {products.map((product) => (
+                <div key={product.id} className="rounded-lg shadow-sm border border-athens-gray overflow-hidden flex flex-col cursor-pointer" onClick={()=> handleProductClick(product.id)}> 
                     <div className="aspect-square">
                         <Image src={product.image} alt={product.name} width={200} height={200} className="object-cover h-full w-full " />
                     </div>
