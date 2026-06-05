@@ -26,7 +26,13 @@ const ProductDetails = () => {
                 Back</Link>
             <div className='flex gap-8 mt-6 w-full h-full'>
                 <div className='aspect-square overflow-hidden rounded-2xl flex-1 h-146'>
-                    <Image src={product.image} width={200} height={200} alt={product.name} />
+                    <Image src={product.image} width={400} height={400} alt={product.name} className='w-full h-full object-cover' />
+                </div>
+                <div className='flex gap-2 flex-col flex-1'>
+                    <p className='text-sm font-medium uppercase tracking-wider text-red-500'>{product.category}</p>
+                    <h1 className='text-4xl font-bold tracking-tight'>{product.name}</h1>
+                    <p className='mt-4 text-3xl font-bold text-shark'>${product.price}</p>
+                    <p className='mt-6 leading-relaxed text-pale-sky'>{product.description}</p>
                 </div>
             </div>
         </div>
