@@ -1,5 +1,7 @@
 "use client"
 import { findProductById } from '@/utils/product'
+import { ArrowLeft } from 'lucide-react'
+import Image from 'next/image'
 import Link from 'next/link'
 import { useParams } from 'next/navigation'
 
@@ -13,12 +15,21 @@ const ProductDetails = () => {
         return <div className='flex flex-col items-center justify-center gap-2 mt-16'>
             <h1 className='text-2xl font-bold'>Product not found</h1>
             <p className='text-pale-sky'>The product you're looking for doesn't exist.</p>
-            <Link href='/' className='text-sm font-medium py-2 px-4 rounded-md bg-red-500 text-white mt-6'></Link>
+            <Link href='/' className='text-sm font-medium py-2 px-4 rounded-md bg-red-500 text-white mt-6'>back to home</Link>
         </div>
     }
 
     return (
-        <div>ProductDetails</div>
+        <div className='py-8 max-w-7xl m-auto'>
+            <Link href='/' className='flex items-center justify-center gap-2 font-medium text-sm'>
+                <ArrowLeft className='h-4 w-4' />
+                Back</Link>
+            <div className='flex gap-8 mt-6 w-full h-full'>
+                <div className='aspect-square overflow-hidden rounded-2xl flex-1 h-146'>
+                    <Image src={product.image} width={200} height={200} alt={product.name} />
+                </div>
+            </div>
+        </div>
     )
 }
 
