@@ -13,7 +13,7 @@ const Product = () => {
     const router = useRouter()
     const dispatch = useDispatch();
 
-    const handleProductClick = (id:string) => {
+    const handleProductClick = (id: string) => {
         router.push(`product/${id}`)
     }
 
@@ -24,7 +24,7 @@ const Product = () => {
     return (
         <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-6 w-full">
             {products.map((product) => (
-                <div key={product.id} className="rounded-lg shadow-sm border border-athens-gray overflow-hidden flex flex-col cursor-pointer" onClick={()=> handleProductClick(product.id)}> 
+                <div key={product.id} className="rounded-lg shadow-sm border border-athens-gray overflow-hidden flex flex-col cursor-pointer" onClick={() => handleProductClick(product.id)}>
                     <div className="aspect-square">
                         <Image src={product.image} alt={product.name} width={200} height={200} className="object-cover h-full w-full " />
                     </div>
@@ -45,7 +45,18 @@ const Product = () => {
                     </div>
                 </div>
             ))}
+
+            {products.length === 0 ? (
+
+                <div className="flex flex-col gap-4 items-center py-8">
+                    <p className="text-lg font-medium">No products found</p>
+                </div>
+            ) : null}
+
+
         </div>
+
+
     )
 }
 
