@@ -1,4 +1,6 @@
 "use client"
+import QuantitySelector from '@/components/QuantitySelector'
+import { useAppSelector } from '@/store/hooks'
 import { findProductById } from '@/utils/product'
 import { ArrowLeft } from 'lucide-react'
 import Image from 'next/image'
@@ -6,10 +8,13 @@ import Link from 'next/link'
 import { useParams } from 'next/navigation'
 
 
+
 const ProductDetails = () => {
     const { id } = useParams()
 
     const product = findProductById(id as string)
+
+    const items = useAppSelector((state) => state.cart.items)
 
     if (!product) {
         return <div className='flex flex-col items-center justify-center gap-2 mt-16'>
@@ -21,7 +26,7 @@ const ProductDetails = () => {
 
     return (
         <div className='py-8 max-w-7xl m-auto'>
-            <Link href='/' className='flex items-center justify-center gap-2 font-medium text-sm'>
+            <Link href='/' className='flex items-center gap-2 font-medium text-sm'>
                 <ArrowLeft className='h-4 w-4' />
                 Back</Link>
             <div className='flex gap-8 mt-6 w-full h-full'>
@@ -33,6 +38,10 @@ const ProductDetails = () => {
                     <h1 className='text-4xl font-bold tracking-tight'>{product.name}</h1>
                     <p className='mt-4 text-3xl font-bold text-shark'>${product.price}</p>
                     <p className='mt-6 leading-relaxed text-pale-sky'>{product.description}</p>
+
+                    <div className='flex gap-4 mt-6'>
+                        {items.some((item) => item.product.id === product.id) ? (<QuantitySelector product={product} /> ): (<button className='font-medium flex-3 text-sm border border-athens-gray py-2.5 cursor-pointer rounded-md '> </button>)}
+                    </div>
                 </div>
             </div>
         </div>
