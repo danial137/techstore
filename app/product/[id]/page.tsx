@@ -40,7 +40,7 @@ const ProductDetails = () => {
                     <p className='mt-6 leading-relaxed text-pale-sky'>{product.description}</p>
 
                     <div className='flex gap-4 mt-6'>
-                        {items.some((item) => item.product.id === product.id) ? (<QuantitySelector product={product} /> ): (<button className='font-medium flex-3 text-sm border border-athens-gray py-2.5 cursor-pointer rounded-md '> </button>)}
+                        {items.some((item) => item.product.id === product.id) ? (<QuantitySelector product={product} />) : (<button className='font-medium flex-3 text-sm border border-athens-gray py-2.5 cursor-pointer rounded-md flex items-center justify-center gap-2 shadow-xs bg-red-500 text-white'> Add to Cart </button>)}
                     </div>
                 </div>
             </div>
